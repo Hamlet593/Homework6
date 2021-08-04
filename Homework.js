@@ -340,90 +340,90 @@ It should have appropriate getters and setters.
 It should have method: passExam(program, grade). Student should contain the data about its programs and exams. passExam will update that data, so if student passed all the exams(grade is great or equal to 50), its year should be increased by one.
 It should have a toString method.
 
-Solution >> պատրաստ կլինի վաղը*/
+Solution*/
 
-/*class Person {
-  constructor (firstName, lastName, gender, age){
+class Person {
+  constructor (firstName, lastName, gender, age) {
     this.firstName = firstName;
     this.lastName = lastName;
     this._gender = gender;
     this.age = age;
   }
-  
-  get firstName(){
+  get firstName() {
     return this._firstName;
   }
-  
-  set firstName(value){
+  set firstName(value) {
     this._firstName = value;
   }
-  
-  get lastName(){
+  get lastName() {
     return this._lastName;
   }
-  
-  set lastName(value){
+  set lastName(value) {
     this._lastName = value;
   }
-  
-  get gender(){
+  get gender() {
     return this._gender;
   }
-  
-  get age(){
+  get age() {
     return this._age;
   }
-  
-  set age(value){
+  set age(value) {
     this._age = value;
   }
-  
-  toString(){
+  toString() {
     return JSON.stringify(this);
   }
-  
-};
+}
 
 class Student extends Person {
-  constructor(programs, year, fee){
-    super();
-    this.programs = programs;
+  constructor (programs, year, fee, ...args) {
+    super(...args);
+    this.ararkaner = programs;
     this.year = year;
     this.fee = fee;
   }
-  
-  get programs(){
-    return this._program;
+
+  get ararkaner(){
+    return this._ararkaner;
   }
   
-  set programs(value){
-    this._programs = value;
+  set ararkaner(value){
+    if(Array.isArray(value)){
+      this._ararkaner = value;
+      this.dataStore = {};
+      this.ararkaner.forEach(item => this.dataStore[item] = 0);
+    }
+    else{
+      alert('Առարկաները պետք է լինեն array')
+    }
   }
   
-  get year(){
+  get year() {
     return this._year;
   }
-  
-  set year(value){
+  set year(value) {
     this._year = value;
   }
-  
-  get fee(){
+  get fee() {
     return this._fee;
   }
-  
-  set fee(value){
+  set fee(value) {
     this._fee = value;
   }
   
-  passExam(program, grade){
-    
+  passExam(nameOfArarka, grade){
+    if(this.ararkaner.includes(nameOfArarka)){
+      this.dataStore[nameOfArarka] = grade;
+      if(Object.values(this.dataStore).every(item => item >= 50)){
+        ++this.year;
+        this.ararkaner = this.ararkaner;
+      }
+    }
   }
   
-  toString(){
+  toString() {
     return JSON.stringify(this);
   }
-  
-};
+}
 
-let example1 = new Student(['Physic', 'Literature', 'Math'], `${1}st course`, `${200000} AMD`);*/
+let student1 = new Student(['Math', 'English', 'Armenian'], 0, 200000, 'Hamo', 'Muradyan', 'Male', 27);
